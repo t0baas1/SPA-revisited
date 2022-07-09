@@ -1,0 +1,14 @@
+{
+  "customers": [
+    {
+      "id": 2409,
+      "name": "Roth Services",
+      "address": {
+        "streetAddress": "8981 In Ave",
+        "city": "San Francisco",
+        "state": "WI",
+        "zip": "44912"
+      }
+    }
+  ]
+}
