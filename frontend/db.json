@@ -9,6 +9,46 @@
         "state": "WI",
         "zip": "44912"
       }
+    },
+    {
+      "id": 585,
+      "name": "Chatham Shipping",
+      "address": {
+        "streetAddress": "3806 Consequat Ct",
+        "city": "Vacaville",
+        "state": "CO",
+        "zip": "23877"
+      }
+    },
+    {
+      "id": 609,
+      "name": "Fisher Corporation",
+      "address": {
+        "streetAddress": "9149 Nullam Dr",
+        "city": "Dunn",
+        "state": "NJ",
+        "zip": "77895"
+      }
+    },
+    {
+      "id": 711,
+      "name": "Rodenberger Foods",
+      "address": {
+        "streetAddress": "5615 Dolor Rd",
+        "city": "Golden",
+        "state": "MN",
+        "zip": "11971"
+      }
+    },
+    {
+      "id": 718,
+      "name": "Lafave Computing",
+      "address": {
+        "streetAddress": "7063 Quis Rd",
+        "city": "Anchorage",
+        "state": "AR",
+        "zip": "88678"
+      }
     }
   ]
 }

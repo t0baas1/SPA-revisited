@@ -17,9 +17,12 @@ const SingleCustomer = ({customer, removeCustomer}) => {
             <h5>Address</h5>
             <ul>
                 <div>{customer.address.streetAddress}</div>
-                <div>{customer.address.city} {customer.address.zip} {customer.address.state}</div>
+                <div>{customer.address.city}</div>
+                <div>{customer.address.state}</div>
+                <div>{customer.address.zip}</div>
             </ul>
             </div>
+            <button>muokkaa</button>
             <button onClick={() =>removeCustomer(customer.id)}>poista</button>
         </div>
     )

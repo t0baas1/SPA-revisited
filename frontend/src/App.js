@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import { Route, Routes, Link, Redirect, useRouterMatch, useHistory, useMatch, useNavigate } from 'react-router-dom'
+import { Route, Routes, Link, useMatch, useNavigate } from 'react-router-dom'
 
 import InitialList from './components/initialCustomers'
 import SavedList from './components/savedList'
@@ -23,8 +23,9 @@ const Menu = () =>{
 }
 
 const App = () => {
-  const [customers, setCustomers] = useState([])
+  let [customers, setCustomers] = useState([])
   const [savedCustomers, setSavedCustomers] = useState([])
+  const [filter, setFilter] = useState('')
 
   const navigate = useNavigate()
   
@@ -48,6 +49,11 @@ const App = () => {
       })
   }
 
+  const updateFilter = (event) => {
+    let filter = event.target.value.toString()
+    setFilter(filter)
+  }
+
   const removeCustomer = (id) => {
     const customer = savedCustomers.find(c => c.id === id)
     const confirmRemoval = window.confirm(`Delete ${customer.name}?`)
@@ -67,12 +73,14 @@ const App = () => {
     ? savedCustomers.find(c => c.id === Number(match.params.id))
     : null
 
+  customers = customers.filter(customer => customer.name.toUpperCase().includes(filter.toUpperCase()))  
+
   return(
       <div>
         <h1>Aspa 2.0</h1>
         <Menu />
         <Routes>
-          <Route path='/' element={<InitialList customers={customers} addCustomer={addCustomer}/>} />
+          <Route path='/' element={<InitialList customers={customers} addCustomer={addCustomer} updateFilter={updateFilter}/>} />
           <Route path='/customers' element={savedCustomers.map(customer => <SavedList key={customer.id} customer={customer} removeCustomer={removeCustomer} />)} />
           <Route path='/customers/:id' element={<SingleCustomer customer={chosenCustomer} removeCustomer={removeCustomer}/>} />
         </Routes>

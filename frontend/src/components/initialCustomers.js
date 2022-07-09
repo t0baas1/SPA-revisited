@@ -1,9 +1,10 @@
 
 
-const InitialList = ({customers, addCustomer}) => {
+const InitialList = ({customers, addCustomer, updateFilter}) => {
 
     return (
       <div>
+        <div>Haku <input onChange={updateFilter} /></div>
         <ul>
           {customers.map(customer => 
             <ul key={customer.id} >
