@@ -49,6 +49,16 @@
         "state": "AR",
         "zip": "88678"
       }
+    },
+    {
+      "id": 1032,
+      "name": "Delatorre Marketing",
+      "address": {
+        "streetAddress": "5884 Rutrum Ave",
+        "city": "Lake Crystal",
+        "state": "NE",
+        "zip": "82895"
+      }
     }
   ]
 }
