@@ -1,21 +1,30 @@
+import { useDispatch, useSelector } from 'react-redux'
+import { createCustomer } from '../reducers/savedReducer'
 
+const Customer = ({ customer, save }) => {
+  return(
+    <div>
+      <h4>{customer.name} <button onClick={save}>tallenna</button></h4>
+    </div>
+  )
+}
 
-const InitialList = ({customers, addCustomer, updateFilter}) => {
+const InitialList = () => {
+  const dispatch = useDispatch()
+  let customers = useSelector(state => state.initial)
 
-    return (
-      <div>
-        <div>Haku <input onChange={updateFilter} /></div>
-        <ul>
-          {customers.map(customer => 
-            <ul key={customer.id} >
-              <div>
-                <h4>{customer.name} <button onClick={() => addCustomer({customer})}>tallenna</button></h4>
-              </div>
-            </ul>
-          )}
-        </ul>
-      </div>
-    )
+  return (
+    <div>
+      <div>Haku</div>
+      {customers.map(customer => 
+          <Customer
+          key={customer.id}
+          customer={customer}
+          save={() => dispatch(createCustomer(customer))}
+          />
+      )}
+    </div>
+  )
 }
 
 export default InitialList

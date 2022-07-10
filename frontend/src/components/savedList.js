@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
-const SavedList = ({ customer }) => {
+const Customer =({customer}) => {
 
     const customerStyle = {
         paddingTop: 10,
@@ -11,11 +12,27 @@ const SavedList = ({ customer }) => {
         marginTop: 5
     }
 
-    return (
+    return(
         <div style={customerStyle}>
             <Link to={`/customers/${customer.id}`}>{customer.name}</Link>
         </div>
-      )
+    )
+}
+
+
+const SavedList = () => {
+    let customers = useSelector(state => state.saved)
+
+    return (
+        <div>
+        {customers.map(customer => 
+            <Customer
+            key={customer.id}
+            customer={customer}
+            />
+            )}
+        </div>
+    )
 }
 
 export default SavedList

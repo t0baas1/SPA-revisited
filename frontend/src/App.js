@@ -5,8 +5,10 @@ import { Route, Routes, Link, useMatch, useNavigate } from 'react-router-dom'
 import InitialList from './components/initialCustomers'
 import SavedList from './components/savedList'
 import SingleCustomer from './components/singleCustomer'
+import { initializeCustomers } from './reducers/initialReducer'
+import { initializeSaved } from './reducers/savedReducer'
+import { useDispatch, useSelector } from 'react-redux'
 
-import initialService from './services/intialCustomers'
 import customerService from './services/savedCustomers'
 
 const Menu = () =>{
@@ -23,38 +25,28 @@ const Menu = () =>{
 }
 
 const App = () => {
-  let [customers, setCustomers] = useState([])
-  const [savedCustomers, setSavedCustomers] = useState([])
+  const dispatch = useDispatch()
+  let savedCustomers = useSelector(state => state.saved)
   const [filter, setFilter] = useState('')
 
   const navigate = useNavigate()
   
   useEffect(() => {
-    initialService
-      .getAll()
-      .then(customers => setCustomers(customers))
-  }, [])
+    dispatch(initializeCustomers())
+  }, [dispatch])
 
   useEffect(() => {
-    customerService
-      .getAll()
-      .then(savedCustomers => setSavedCustomers(savedCustomers))
-  }, [])
+    dispatch(initializeSaved())
+  })
 
-  const addCustomer = ({customer}) => {
-    customerService
-      .create(customer)
-      .then(returnedCustomer => {
-        setSavedCustomers(savedCustomers.concat(returnedCustomer))
-      })
-  }
+
 
   const updateFilter = (event) => {
     let filter = event.target.value.toString()
     setFilter(filter)
   }
 
-  const removeCustomer = (id) => {
+ /* const removeCustomer = (id) => {
     const customer = savedCustomers.find(c => c.id === id)
     const confirmRemoval = window.confirm(`Delete ${customer.name}?`)
 
@@ -66,23 +58,23 @@ const App = () => {
       
       navigate('/customers')
     }
-  }
+  }*/
 
   const match = useMatch('/customers/:id')
   const chosenCustomer = match
     ? savedCustomers.find(c => c.id === Number(match.params.id))
     : null
 
-  customers = customers.filter(customer => customer.name.toUpperCase().includes(filter.toUpperCase()))  
+  //customers = customers.filter(customer => customer.name.toUpperCase().includes(filter.toUpperCase()))  
 
   return(
       <div>
         <h1>Aspa 2.0</h1>
         <Menu />
         <Routes>
-          <Route path='/' element={<InitialList customers={customers} addCustomer={addCustomer} updateFilter={updateFilter}/>} />
-          <Route path='/customers' element={savedCustomers.map(customer => <SavedList key={customer.id} customer={customer} removeCustomer={removeCustomer} />)} />
-          <Route path='/customers/:id' element={<SingleCustomer customer={chosenCustomer} removeCustomer={removeCustomer}/>} />
+          <Route path='/' element={<InitialList />} />
+          <Route path='/customers' element={<SavedList />} />
+          <Route path='/customers/:id' element={<SingleCustomer customer={chosenCustomer}/>} />
         </Routes>
       </div>
   )
