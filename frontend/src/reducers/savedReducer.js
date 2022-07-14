@@ -13,16 +13,32 @@ const customerSlice = createSlice({
         },
         appendCustomer(state, action) {
             state.push(action.payload)
+        },
+        customerRemoval(state, action) {
+            const id = action.payload
+            return state.filter(customer => customer.id !== id)
         }
     }
 })
 
-export const { setCustomers, appendCustomer } = customerSlice.actions
+export const { setCustomers, appendCustomer, customerRemoval } = customerSlice.actions
 
 export const initializeSaved = () => {
     return async dispatch => {
         const customers = await savedCustomers.getAll()
         dispatch(setCustomers(customers))
+    }
+}
+
+export const removeCustomer = customer => {
+    console.log('tulee tänne')
+    const id = customer.id
+    console.log(id)
+    return async dispatch => {
+        console.log('tulee returniin')
+        const deletedCustomer = await savedCustomers.deleteCustomer(id)
+        console.log(deletedCustomer)
+        dispatch(customerRemoval(customer))
     }
 }
 

@@ -1,5 +1,7 @@
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createCustomer } from '../reducers/savedReducer'
+import { initializeCustomers } from '../reducers/initialReducer'
 
 const Customer = ({ customer, save }) => {
   return(
@@ -12,6 +14,7 @@ const Customer = ({ customer, save }) => {
 const InitialList = () => {
   const dispatch = useDispatch()
   let customers = useSelector(state => state.initial)
+
 
   return (
     <div>

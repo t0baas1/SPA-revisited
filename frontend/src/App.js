@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import { Route, Routes, Link, useMatch, useNavigate } from 'react-router-dom'
+import { Route, Routes, Link, useMatch} from 'react-router-dom'
 
 import InitialList from './components/initialCustomers'
 import SavedList from './components/savedList'
@@ -8,8 +8,6 @@ import SingleCustomer from './components/singleCustomer'
 import { initializeCustomers } from './reducers/initialReducer'
 import { initializeSaved } from './reducers/savedReducer'
 import { useDispatch, useSelector } from 'react-redux'
-
-import customerService from './services/savedCustomers'
 
 const Menu = () =>{
   const padding = {
@@ -29,7 +27,6 @@ const App = () => {
   let savedCustomers = useSelector(state => state.saved)
   const [filter, setFilter] = useState('')
 
-  const navigate = useNavigate()
   
   useEffect(() => {
     dispatch(initializeCustomers())
@@ -37,9 +34,9 @@ const App = () => {
 
   useEffect(() => {
     dispatch(initializeSaved())
-  })
+  }, [dispatch])
 
-
+ 
 
   const updateFilter = (event) => {
     let filter = event.target.value.toString()

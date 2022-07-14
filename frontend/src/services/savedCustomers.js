@@ -13,6 +13,7 @@ const create = async (customer) => {
 }
 
 const deleteCustomer = async (id) => {
+    console.log('tulee serviceen')
     const url = baseUrl + '/' + id
     const response = await axios.delete(url)
     return response.data

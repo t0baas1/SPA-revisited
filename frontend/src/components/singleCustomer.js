@@ -1,5 +1,23 @@
+import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import savedService from '../services/savedCustomers'
 
-const SingleCustomer = ({customer, removeCustomer}) => {
+const SingleCustomer = ({customer}) => {
+    let savedCustomers = useSelector(state => state.saved)
+    
+    const navigate = useNavigate()
+
+    const handleDelete = (id) => {
+        console.log(id)
+        savedService
+            .deleteCustomer(id)
+            .then(() =>
+            savedCustomers.filter(customer => customer.id !== id)
+            )
+        navigate('/customers')
+
+    }
+
 
     const customerStyle = {
         paddingTop: 10,
@@ -23,7 +41,7 @@ const SingleCustomer = ({customer, removeCustomer}) => {
             </ul>
             </div>
             <button>muokkaa</button>
-            <button onClick={() =>removeCustomer(customer.id)}>poista</button>
+            <button onClick={() => handleDelete(customer.id)}>poista</button>
         </div>
     )
 }
