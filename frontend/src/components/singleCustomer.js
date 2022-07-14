@@ -1,9 +1,10 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import savedService from '../services/savedCustomers'
 
 const SingleCustomer = ({customer}) => {
+    const customer = id
     let savedCustomers = useSelector(state => state.saved)
     const [customerName, setCustomerName] = useState(customer.name)
     const [customerStreetAddress, setCustomerStreetAddress] = useState(customer.address.streetAddress)
@@ -11,6 +12,11 @@ const SingleCustomer = ({customer}) => {
     const [customerState, setCustomerState] = useState(customer.address.state)
     const [customerZip, setCustomerZip] = useState(customer.address.zip)
     const [visible, setVisible] = useState(true)
+    const location = useLocation()
+
+    useEffect(() => {
+
+    }, [location])
     
     const navigate = useNavigate()
 
@@ -28,7 +34,22 @@ const SingleCustomer = ({customer}) => {
     const handleEdit = (event) => {
         event.preventDefault()
         console.log('toimii')
-        
+        const id = customer.id
+        const newCustomer = {
+            name: customerName,
+            address: {
+                streetAddress: customerStreetAddress,
+                city: customerCity,
+                state: customerState,
+                zip: customerZip
+            }
+        }
+        savedService
+            .update(id, newCustomer)
+            .then(returnedCustomer => {
+                savedCustomers.map(customer => customer.id !== returnedCustomer.id ? customer : returnedCustomer)
+            })
+        setVisible(!visible)
     }
 
 

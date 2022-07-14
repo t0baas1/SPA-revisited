@@ -12,6 +12,12 @@ const create = async (customer) => {
     return response.data
 }
 
+const update = async (id, customer) => {
+    const url = baseUrl + '/' + id
+    const response = await axios.put(url, customer)
+    return response.data
+}
+
 const deleteCustomer = async (id) => {
     console.log('tulee serviceen')
     const url = baseUrl + '/' + id
@@ -19,4 +25,5 @@ const deleteCustomer = async (id) => {
     return response.data
 }
 
-export default { getAll, create, deleteCustomer }
+// eslint-disable-next-line import/no-anonymous-default-export
+export default { getAll, create, deleteCustomer, update }
