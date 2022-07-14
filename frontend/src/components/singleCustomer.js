@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import savedService from '../services/savedCustomers'
 
 const SingleCustomer = ({customer}) => {
-    const customer = id
+
     let savedCustomers = useSelector(state => state.saved)
     const [customerName, setCustomerName] = useState(customer.name)
     const [customerStreetAddress, setCustomerStreetAddress] = useState(customer.address.streetAddress)
