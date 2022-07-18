@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = 'http://localhost:3001/customers'
+const baseUrl = 'https://localhost:7117/api/customeritems'
 
 const getAll = async () => {
     const response = await axios.get(baseUrl)

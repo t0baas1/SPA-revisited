@@ -9,7 +9,7 @@ using backendApi.Models;
 
 namespace backend
 {
-    [Route("api/[controller]")]
+    [Route("api/CustomerItems")]
     [ApiController]
     public class CustomerItemsController : ControllerBase
     {
@@ -33,7 +33,7 @@ namespace backend
 
         // GET: api/CustomerItems/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<CustomerItem>> GetCustomerItem(long id)
+        public async Task<ActionResult<CustomerItem>> GetCustomerItem(int id)
         {
           if (_context.CustomerItems == null)
           {
@@ -52,9 +52,9 @@ namespace backend
         // PUT: api/CustomerItems/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCustomerItem(long id, CustomerItem customerItem)
+        public async Task<IActionResult> PutCustomerItem(int id, CustomerItem customerItem)
         {
-            if (id != customerItem.Id)
+            if (id != customerItem.id)
             {
                 return BadRequest();
             }
@@ -89,16 +89,21 @@ namespace backend
           {
               return Problem("Entity set 'CustomerContext.CustomerItems'  is null.");
           }
-            _context.CustomerItems.Add(customerItem);
+            _context.CustomerItems.Add(new CustomerItem
+            {
+                id = customerItem.id,
+                name = customerItem.name,
+                address = customerItem.address
+            });
             await _context.SaveChangesAsync();
 
             //return CreatedAtAction("GetCustomerItem", new { id = customerItem.Id }, customerItem);
-            return CreatedAtAction(nameof(GetCustomerItem), new { id = customerItem.Id}, customerItem);
+            return CreatedAtAction(nameof(GetCustomerItem), new { id = customerItem.id}, customerItem);
         }
 
         // DELETE: api/CustomerItems/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCustomerItem(long id)
+        public async Task<IActionResult> DeleteCustomerItem(int id)
         {
             if (_context.CustomerItems == null)
             {
@@ -116,9 +121,9 @@ namespace backend
             return NoContent();
         }
 
-        private bool CustomerItemExists(long id)
+        private bool CustomerItemExists(int id)
         {
-            return (_context.CustomerItems?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.CustomerItems?.Any(e => e.id == id)).GetValueOrDefault();
         }
     }
 }
