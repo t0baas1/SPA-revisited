@@ -18,7 +18,8 @@ builder.Services.AddCors(options =>
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddNewtonsoftJson();
 builder.Services.AddDbContext<CustomerContext>(opt =>
     opt.UseInMemoryDatabase("CustomerList"));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

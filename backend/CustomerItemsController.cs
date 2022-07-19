@@ -11,6 +11,7 @@ namespace backend
 {
     [Route("api/CustomerItems")]
     [ApiController]
+    [Produces("application/json")]
     public class CustomerItemsController : ControllerBase
     {
         private readonly CustomerContext _context;
@@ -89,12 +90,7 @@ namespace backend
           {
               return Problem("Entity set 'CustomerContext.CustomerItems'  is null.");
           }
-            _context.CustomerItems.Add(new CustomerItem
-            {
-                id = customerItem.id,
-                name = customerItem.name,
-                address = customerItem.address
-            });
+            _context.CustomerItems.Add(customerItem);
             await _context.SaveChangesAsync();
 
             //return CreatedAtAction("GetCustomerItem", new { id = customerItem.Id }, customerItem);
