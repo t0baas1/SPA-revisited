@@ -1,32 +1,25 @@
-import { useNavigate, useLocation } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
-import savedService from '../services/savedCustomers'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { useState } from 'react'
+
+import { removeCustomer, editCustomer } from '../reducers/savedReducer'
 
 const SingleCustomer = ({customer}) => {
 
-    let savedCustomers = useSelector(state => state.saved)
+    const dispatch = useDispatch()
+
     const [customerName, setCustomerName] = useState(customer.name)
     const [customerStreetAddress, setCustomerStreetAddress] = useState(customer.address.streetAddress)
     const [customerCity, setCustomerCity] = useState(customer.address.city)
     const [customerState, setCustomerState] = useState(customer.address.state)
     const [customerZip, setCustomerZip] = useState(customer.address.zip)
     const [visible, setVisible] = useState(true)
-    const location = useLocation()
-
-    useEffect(() => {
-
-    }, [location])
     
     const navigate = useNavigate()
 
     const handleDelete = (id) => {
         console.log(id)
-        savedService
-            .deleteCustomer(id)
-            .then(() =>
-            savedCustomers.filter(customer => customer.id !== id)
-            )
+        dispatch(removeCustomer(id))
         navigate('/customers')
 
     }
@@ -44,11 +37,7 @@ const SingleCustomer = ({customer}) => {
                 zip: customerZip
             }
         }
-        savedService
-            .update(id, newCustomer)
-            .then(returnedCustomer => {
-                savedCustomers.map(customer => customer.id !== returnedCustomer.id ? customer : returnedCustomer)
-            })
+        dispatch(editCustomer(id, newCustomer))
         setVisible(!visible)
     }
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 import { Route, Routes, Link, useMatch} from 'react-router-dom'
 
@@ -15,19 +15,21 @@ const Menu = () =>{
   }
 
   return (
-    <div>
-      <Link style={padding} to='/'>Koti</Link>
-      <Link style={padding} to='/customers'>Listaus</Link>
-    </div>
+    <nav className='nav'>
+      <h1 className="site-title">Aspa 2.0</h1>
+      <ul>
+        <Link style={padding} to='/'>Koti</Link>
+        <Link style={padding} to='/customers'>Listaus</Link>
+      </ul>
+    </nav>
   )
 }
 
 const App = () => {
   const dispatch = useDispatch()
   let savedCustomers = useSelector(state => state.saved)
-  const [filter, setFilter] = useState('')
 
-  
+
   useEffect(() => {
     dispatch(initializeCustomers())
   }, [dispatch])
@@ -36,37 +38,13 @@ const App = () => {
     dispatch(initializeSaved())
   }, [dispatch])
 
- 
-
-  const updateFilter = (event) => {
-    let filter = event.target.value.toString()
-    setFilter(filter)
-  }
-
- /* const removeCustomer = (id) => {
-    const customer = savedCustomers.find(c => c.id === id)
-    const confirmRemoval = window.confirm(`Delete ${customer.name}?`)
-
-    if (confirmRemoval) {
-      customerService
-      .deleteCustomer(id)
-      .then(() =>
-        setSavedCustomers(savedCustomers.filter(c => c.id !== id)))
-      
-      navigate('/customers')
-    }
-  }*/
-
   const match = useMatch('/customers/:id')
   const chosenCustomer = match
     ? savedCustomers.find(c => c.id === Number(match.params.id))
     : null
 
-  //customers = customers.filter(customer => customer.name.toUpperCase().includes(filter.toUpperCase()))  
-
   return(
       <div>
-        <h1>Aspa 2.0</h1>
         <Menu />
         <Routes>
           <Route path='/' element={<InitialList />} />

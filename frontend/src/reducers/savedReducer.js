@@ -17,11 +17,14 @@ const customerSlice = createSlice({
         customerRemoval(state, action) {
             const id = action.payload
             return state.filter(customer => customer.id !== id)
+        },
+        addEdit(state, action) {
+            return state.map(customer => customer.id !== action.payload.id ? customer : action.payload)
         }
     }
 })
 
-export const { setCustomers, appendCustomer, customerRemoval } = customerSlice.actions
+export const { setCustomers, appendCustomer, customerRemoval, addEdit } = customerSlice.actions
 
 export const initializeSaved = () => {
     return async dispatch => {
@@ -30,18 +33,24 @@ export const initializeSaved = () => {
     }
 }
 
-export const removeCustomer = customer => {
-    console.log('tulee tänne')
-    const id = customer.id
+export const removeCustomer = (id) => {
+    console.log('tulee reducerille')
     console.log(id)
     return async dispatch => {
         console.log('tulee returniin')
-        const deletedCustomer = await savedCustomers.deleteCustomer(id)
-        console.log(deletedCustomer)
-        dispatch(customerRemoval(customer))
+        await savedCustomers.deleteCustomer(id)
+        dispatch(customerRemoval(id))
     }
 }
 
+export const editCustomer = (id, customer) => {
+    console.log(id)
+    console.log(customer)
+    return async dispatch => {
+        const edited = await savedCustomers.update(id, customer)
+        dispatch(addEdit(edited))
+    }
+}
 export const createCustomer = customer => {
     return async dispatch => {
         const newCustomer = await savedCustomers.create(customer)

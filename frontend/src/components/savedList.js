@@ -1,7 +1,5 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { useEffect, useDispatch } from 'react'
-import { initializeSaved } from '../reducers/savedReducer'
 
 const Customer =({customer}) => {
 
