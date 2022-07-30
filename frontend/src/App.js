@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { Route, Routes, Link, useMatch} from 'react-router-dom'
 
@@ -44,14 +44,14 @@ const App = () => {
     : null
 
   return(
-      <div>
-        <Menu />
-        <Routes>
-          <Route path='/' element={<InitialList />} />
-          <Route path='/customers' element={<SavedList />} />
-          <Route path='/customers/:id' element={<SingleCustomer customer={chosenCustomer}/>} />
-        </Routes>
-      </div>
+    <div>
+      <Menu />
+      <Routes>
+        <Route path='/' element={<InitialList />} />
+        <Route path='/customers' element={<SavedList />} />
+        <Route path='/customers/:id' element={<SingleCustomer customer={chosenCustomer}/>} />
+      </Routes>
+    </div>
   )
 }
 
