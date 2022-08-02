@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createCustomer } from '../reducers/savedReducer'
+import { Table } from 'react-bootstrap'
 
 const Customer = ({ customer, save }) => {
   return(
     <div>
-      <h4>{customer.name} <button onClick={save}>tallenna</button></h4>
+      <p>{customer.name} <button onClick={save}>tallenna</button></p>
     </div>
   )
 }
@@ -25,14 +26,21 @@ const InitialList = () => {
   return (
     <div>
       <div>Haku <input onChange={updateFilter}></input></div>
-      
-      {customers.map(customer => 
-          <Customer
-          key={customer.id}
-          customer={customer}
-          save={() => dispatch(createCustomer(customer))}
-          />
-      )}
+      <Table striped>
+        <tbody>
+          {customers.map(customer =>
+            <tr key={customer.id}>
+              <td>
+                <Customer
+                key={customer.id}
+                customer={customer}
+                save={() => dispatch(createCustomer(customer))}
+                />
+              </td>
+            </tr>
+          )}
+        </tbody>
+        </Table>
     </div>
   )
 }

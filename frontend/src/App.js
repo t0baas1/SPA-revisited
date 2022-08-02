@@ -8,6 +8,7 @@ import SingleCustomer from './components/singleCustomer'
 import { initializeCustomers } from './reducers/initialReducer'
 import { initializeSaved } from './reducers/savedReducer'
 import { useDispatch, useSelector } from 'react-redux'
+import { Navbar, Nav} from 'react-bootstrap'
 
 const Menu = () =>{
   const padding = {
@@ -15,13 +16,20 @@ const Menu = () =>{
   }
 
   return (
-    <nav className='nav'>
+    <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
       <h1 className="site-title">Aspa 2.0</h1>
-      <ul>
-        <Link style={padding} to='/'>Koti</Link>
-        <Link style={padding} to='/customers'>Listaus</Link>
-      </ul>
-    </nav>
+      <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+      <Navbar.Collapse id="responsive-navbar-nav" >
+        <Nav className="mr-auto">
+          <Nav.Link href="#" as="span">
+            <Link style={padding} to="/">Koti</Link>      
+          </Nav.Link>
+          <Nav.Link href="#" as="span">
+            <Link style={padding} to="/customers">Tallennetut</Link>      
+          </Nav.Link>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
   )
 }
 
@@ -43,15 +51,17 @@ const App = () => {
     ? savedCustomers.find(c => c.id === Number(match.params.id))
     : null
 
-  return(
-    <div>
-      <Menu />
-      <Routes>
-        <Route path='/' element={<InitialList />} />
-        <Route path='/customers' element={<SavedList />} />
-        <Route path='/customers/:id' element={<SingleCustomer customer={chosenCustomer}/>} />
-      </Routes>
-    </div>
+  return (
+    <div className="container">
+      <div>
+        <Menu />
+        <Routes>
+          <Route path='/' element={<InitialList />} />
+          <Route path='/customers' element={<SavedList />} />
+          <Route path='/customers/:id' element={<SingleCustomer customer={chosenCustomer}/>} />
+        </Routes>
+        </div>
+      </div>
   )
 }
 
