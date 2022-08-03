@@ -5,7 +5,9 @@ import { Table } from "react-bootstrap";
 const Customer = ({ customer }) => {
   return (
     <div>
-      <Link to={`/customers/${customer.id}`}>{customer.name}</Link>
+      <Link id="singlecustomer" to={`/customers/${customer.id}`}>
+        {customer.name}
+      </Link>
     </div>
   );
 };
