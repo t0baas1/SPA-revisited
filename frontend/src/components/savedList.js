@@ -1,38 +1,33 @@
-import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Table } from "react-bootstrap";
 
-const Customer =({customer}) => {
-
-  const customerStyle = {
-    paddingTop: 10,
-    paddingLeft: 2,
-    border: 'solid',
-    borderWidth: 1,
-    marginBottom: 5,
-    marginTop: 5
-  }
-
-  return(
-    <div style={customerStyle}>
+const Customer = ({ customer }) => {
+  return (
+    <div>
       <Link to={`/customers/${customer.id}`}>{customer.name}</Link>
     </div>
-  )
-}
-
+  );
+};
 
 const SavedList = () => {
-  let customers = useSelector(state => state.saved)
+  let customers = useSelector((state) => state.saved);
 
   return (
     <div>
-      {customers.map(customer => 
-        <Customer
-          key={customer.id}
-          customer={customer}
-        />
-      )}
+      <Table striped>
+        <tbody>
+          {customers.map((customer) => (
+            <tr key={customer.id}>
+              <td>
+                <Customer key={customer.id} customer={customer} />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
     </div>
-  )
-}
+  );
+};
 
-export default SavedList
+export default SavedList;
