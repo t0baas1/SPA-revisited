@@ -7,9 +7,10 @@ describe("Aspa", () => {
     cy.contains("Haku");
   });
 
-  it("pystyy klikkaamaan tallennusta", () => {
+  it("pystyy klikkaamaan tallennusta, ilmoittaa jos asiakas on tallennettu", () => {
     cy.visit("/");
     cy.contains("tallenna").click();
+    cy.contains("Tallennettu!");
   });
 
   it("hakuun pystyy kirjoittamaan", () => {

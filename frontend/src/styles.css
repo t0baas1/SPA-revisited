@@ -46,3 +46,7 @@
   .nav li:hover {
     background-color: #777;
   }
+
+  .success {
+    color: green
+  }
