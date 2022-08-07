@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Topi\\Desktop\\Koulu\\Fullstack\\SPA-revisited\\backend\\backend.csproj": {}
+    "C:\\Users\\Topi\\Desktop\\SPA revisited\\backend\\backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Topi\\Desktop\\Koulu\\Fullstack\\SPA-revisited\\backend\\backend.csproj": {
+    "C:\\Users\\Topi\\Desktop\\SPA revisited\\backend\\backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Topi\\Desktop\\Koulu\\Fullstack\\SPA-revisited\\backend\\backend.csproj",
+        "projectUniqueName": "C:\\Users\\Topi\\Desktop\\SPA revisited\\backend\\backend.csproj",
         "projectName": "backend",
-        "projectPath": "C:\\Users\\Topi\\Desktop\\Koulu\\Fullstack\\SPA-revisited\\backend\\backend.csproj",
+        "projectPath": "C:\\Users\\Topi\\Desktop\\SPA revisited\\backend\\backend.csproj",
         "packagesPath": "C:\\Users\\Topi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Topi\\Desktop\\Koulu\\Fullstack\\SPA-revisited\\backend\\obj\\",
+        "outputPath": "C:\\Users\\Topi\\Desktop\\SPA revisited\\backend\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
           "C:\\Users\\Topi\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -89,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

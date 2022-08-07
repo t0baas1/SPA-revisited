@@ -9,11 +9,11 @@ const SingleCustomer = ({ customer }) => {
 
   const [customerName, setCustomerName] = useState(customer.name);
   const [customerStreetAddress, setCustomerStreetAddress] = useState(
-    customer.address.streetAddress
+    customer.streetAddress
   );
-  const [customerCity, setCustomerCity] = useState(customer.address.city);
-  const [customerState, setCustomerState] = useState(customer.address.state);
-  const [customerZip, setCustomerZip] = useState(customer.address.zip);
+  const [customerCity, setCustomerCity] = useState(customer.city);
+  const [customerState, setCustomerState] = useState(customer.state);
+  const [customerZip, setCustomerZip] = useState(customer.zip);
   const [visible, setVisible] = useState(true);
 
   const navigate = useNavigate();
@@ -29,13 +29,12 @@ const SingleCustomer = ({ customer }) => {
     console.log("toimii");
     const id = customer.id;
     const newCustomer = {
+      id: id,
       name: customerName,
-      address: {
-        streetAddress: customerStreetAddress,
-        city: customerCity,
-        state: customerState,
-        zip: customerZip,
-      },
+      streetAddress: customerStreetAddress,
+      city: customerCity,
+      state: customerState,
+      zip: customerZip,
     };
     dispatch(editCustomer(id, newCustomer));
     setVisible(!visible);
@@ -119,10 +118,10 @@ const SingleCustomer = ({ customer }) => {
         <h4>{customer.name}</h4>
         <h5>Address</h5>
         <ul>
-          <div>{customer.address.streetAddress}</div>
-          <div>{customer.address.city}</div>
-          <div>{customer.address.state}</div>
-          <div>{customer.address.zip}</div>
+          <div>{customer.streetAddress}</div>
+          <div>{customer.city}</div>
+          <div>{customer.state}</div>
+          <div>{customer.zip}</div>
         </ul>
       </div>
       <button id="muokkaa" onClick={() => setVisible(!visible)}>

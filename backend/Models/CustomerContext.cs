@@ -11,6 +11,5 @@ namespace backendApi.Models
         }
 
         public DbSet<CustomerItem> CustomerItems { get; set; } = null!;
-        public DbSet<Address> Addresses {get; set;} = null!;
     }
 }

@@ -11,14 +11,8 @@ namespace backendApi.Models
     {
         public int id { get; set; }
         public string name { get; set; }
-        [JsonProperty("address")]
-        public Address address { get; set; }
-    }
-    public class Address
-    {
-        [Key]
         [JsonProperty("streetAddress")]
-        public string streetAddress { get; set;}
+        public string streetAddress { get; set; }
         [JsonProperty("city")]
         public string city { get; set; }
         [JsonProperty("state")]

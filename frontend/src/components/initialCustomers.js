@@ -34,6 +34,20 @@ const InitialList = () => {
     customer.name.toUpperCase().includes(filter.toUpperCase())
   );
 
+  const NewCustomer = ({ customer }) => {
+    console.log(customer);
+    const newCustomer = {
+      id: customer.id,
+      name: customer.name,
+      streetAddress: customer.address.streetAddress,
+      city: customer.address.city,
+      state: customer.address.state,
+      zip: customer.address.zip,
+    };
+    console.log(newCustomer);
+    dispatch(createCustomer(newCustomer));
+  };
+
   return (
     <div>
       <div>
@@ -47,7 +61,7 @@ const InitialList = () => {
                 <Customer
                   key={customer.id}
                   customer={customer}
-                  save={() => dispatch(createCustomer(customer))}
+                  save={() => NewCustomer({ customer })}
                 />
               </td>
             </tr>
