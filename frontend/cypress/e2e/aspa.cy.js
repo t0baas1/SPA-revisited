@@ -13,8 +13,13 @@ describe("Aspa", () => {
     cy.contains("Tallennettu!");
   });
 
-  it("hakuun pystyy kirjoittamaan", () => {
+  it("Kotinäkymän hakuun pystyy kirjoittamaan", () => {
     cy.visit("/");
+    cy.get("input").type("abc");
+  });
+
+  it("Tallennettujen hakuun pystyy kirjoittamaan", () => {
+    cy.visit("/customers");
     cy.get("input").type("abc");
   });
 

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Table } from "react-bootstrap";
@@ -14,12 +15,25 @@ const Customer = ({ customer }) => {
 
 const SavedList = () => {
   let customers = useSelector((state) => state.saved);
+  const [filter, setFilter] = useState("");
+
+  const updateFilter = (event) => {
+    let filter = event.target.value.toString();
+    setFilter(filter);
+  };
+
+  let customersFiltered = customers.filter((customer) =>
+    customer.name.toUpperCase().includes(filter.toUpperCase())
+  );
 
   return (
     <div>
+      <div>
+        Haku <input onChange={updateFilter}></input>
+      </div>
       <Table striped>
         <tbody>
-          {customers.map((customer) => (
+          {customersFiltered.map((customer) => (
             <tr key={customer.id}>
               <td>
                 <Customer key={customer.id} customer={customer} />
